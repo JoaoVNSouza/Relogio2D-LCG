@@ -34,12 +34,14 @@
  */
 int main(int argc, char *argv[])
 {
-    inicializa();                                // Define a cor de fundo e inicializa variáveis.
+    inicializa();                                // Inicializa variáveis.
     glutInit(&argc, argv);                       // Inicicializa com os argumentos passados no prompt de comando.
     glutInitWindowSize(width, height);           // Define o tamanho da janela em pixels.
     glutInitWindowPosition(550, 250);            // Define a posição do canto superior esquerda da janela.
     glutInitDisplayMode(GLUT_RGB | GLUT_SINGLE); // Descreve as configurações da janela (cores suportadas e suas características).
     glutCreateWindow("Relogio");                 // Cria a janela e inseri um título.
+
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f); // Seleciona a cor de fundo para limpeza da tela (R, G, B, A).
     /*
      * Rotinas callback:
      *  Se ocorrer um evento de sistema devido a interação com a janela criada
@@ -164,8 +166,6 @@ static void idle()
 // Funções/Procedimentos.
 void inicializa()
 {
-    glClearColor(0, 0, 0, 0); // Seleciona a cor de fundo para limpeza da tela (R, G, B, A).
-
     /* Inicialização das variáveis globais.*/
     width = 400;
     height = 400;
