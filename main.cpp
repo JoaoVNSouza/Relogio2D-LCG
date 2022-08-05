@@ -98,7 +98,6 @@ static void display()
     draw_aro();
     draw_interno();
 
-    // DesenhaTexto(GLUT_BITMAP_9_BY_15, "OpenGl");
     glFlush(); // Faz os comandos não executados serem executados.
 }
 
