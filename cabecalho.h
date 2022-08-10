@@ -22,9 +22,9 @@ static void idle();
 void inicializa();
 void draw_aro();
 void draw_interno();
-void draw_ponteiros(float);
 
 // Primitivas.
 void draw_circle(int);
+void draw_ponteiros(float);
 
 #endif // CABECALHO_H_INCLUDED

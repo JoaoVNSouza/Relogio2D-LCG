@@ -12,7 +12,7 @@
  *
  * Objetivo:
  * - Desenhar um relógio.
- * - Implementar o funcionamento do mesmo.
+ * - Fazer ele funcionar como um relógio.
  * Referência: Autoria própria.
  */
 
@@ -39,9 +39,10 @@ int main(int argc, char *argv[])
     glutInitWindowSize(width, height);           // Define o tamanho da janela em pixels.
     glutInitWindowPosition(550, 250);            // Define a posição do canto superior esquerda da janela.
     glutInitDisplayMode(GLUT_RGB | GLUT_SINGLE); // Descreve as configurações da janela (cores suportadas e suas características).
-    glutCreateWindow("Relogio");                 // Cria a janela e inseri um título.
+    glutCreateWindow("Relogio2D");               // Cria a janela e inseri um título.
 
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f); // Seleciona a cor de fundo para limpeza da tela (R, G, B, A).
+
     /*
      * Rotinas callback:
      *  Se ocorrer um evento de sistema devido a interação com a janela criada
@@ -50,7 +51,7 @@ int main(int argc, char *argv[])
     glutReshapeFunc(resize);  // Executa o procedimento resize.
     glutDisplayFunc(display); // Executa o procedimento display.
     glutKeyboardFunc(key);    // Executa o procedimento key.
-    glutIdleFunc(idle);
+    glutIdleFunc(idle);       // Executa o procedimento idle.
 
     glutMainLoop(); // Mantém o programa executando em loop, aguardando a ocorrência de novos eventos com a janela.
 
@@ -163,9 +164,12 @@ static void idle()
 }
 
 // Funções/Procedimentos.
+
+/*
+ * Inicialização das variáveis globais.
+ */
 void inicializa()
 {
-    /* Inicialização das variáveis globais.*/
     width = 400;
     height = 400;
     raio = 85;
@@ -188,12 +192,12 @@ void draw_aro()
     for (i = 0; i < 60; i++)
     {
         radiano = angulo * (PI / 180);
-        glVertex2f(raio * sin(radiano), raio * cos(radiano));
+        glVertex2f(raio * cos(radiano), raio * sin(radiano));
 
         if (i % 5 == 0) // Índices multiplos de 5 são maiores.
-            glVertex2f((raio - 9) * sin(radiano), (raio - 9) * cos(radiano));
+            glVertex2f((raio - 9) * cos(radiano), (raio - 9) * sin(radiano));
         else
-            glVertex2f((raio - 3) * sin(radiano), (raio - 3) * cos(radiano));
+            glVertex2f((raio - 3) * cos(radiano), (raio - 3) * sin(radiano));
         angulo += aumento;
     }
     glEnd();
@@ -225,9 +229,10 @@ void draw_interno()
     glRotatef(rotSec, 0, 0, 1); // Rotaciona ponteiro dos segundos.
     draw_ponteiros(raio / 1.2); // Ponteiro dos segundos.
 
-    // Desenhando eixo central.
+    /* Desenhando eixo central. */
     glColor3f(1, 1, 0); // Cor Amarelo.
-    draw_circle(5);
+    glLoadIdentity();
+    draw_circle(raio / 17); // Eixo dos ponteiros.
 }
 
 /*
@@ -257,7 +262,7 @@ void draw_circle(int r)
     for (i = 0; i < 60; i++)
     {
         radiano = angulo * (PI / 180);
-        glVertex2f(r * sin(radiano), r * cos(radiano));
+        glVertex2f(r * cos(radiano), r * sin(radiano));
         angulo += aumento;
     }
     glEnd();
